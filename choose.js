@@ -1,34 +1,15 @@
-const cube1 = document.getElementsByClassName('cube')[0];
-const cube2 = document.getElementsByClassName('cube')[1];
-const cubeShadow1 = document.getElementsByClassName('shadow')[0];
-const cubeShadow2 = document.getElementsByClassName('shadow')[1];
-const board = document.querySelector('.board');
-const choose = document.getElementsByClassName('choose')[0];
-const figures = ['shoes','ship','car','pin','iron','cart'];
-
-let Players = [];
-let playerNumber = 0;
-/*end const*/
 /*start function*/
 function removeChoose(){
     while(choose.children.length){
         choose.children[0].remove();
     }
 }
-for(let i = 0; i<choose.children.length;i++){
-    choose.children[i].onclick = function(){
-        playerNumber = i;
-        removeChoose();
-        createPlayers(0);
-    }
-}
-
 function createPlayers(i){
     if(i <= playerNumber){
         writeName(i);
     }
     else{
-        console.log(Players);
+        start();
     }
 }
 function writeName(i){
@@ -54,8 +35,6 @@ function writeName(i){
             alert("Ваше имя не правильно!");
         }
         else{
-            alert(i);
-            console.log(Players);
             Players[i] = new Object();
             Players[i].name = choose.querySelector('input').value;
             chooseFigure(i);
@@ -80,7 +59,9 @@ function chooseFigure(i){
     }
     for(let j = 0; j<choose.children.length;j++){
         if(choose.children[j].classList.contains('picked')){
-            choose.children[j].onclick = function()
+            choose.children[j].onclick = function(){
+                alert("Выберите другую фигиру");
+            }
         }
         choose.children[j].onclick = function(){
             Players[i].figures = figures[j];
@@ -88,4 +69,12 @@ function chooseFigure(i){
             createPlayers(i+1);
         }
     }
-}      
+}
+/*end function*/
+for(let i = 0; i<choose.children.length;i++){
+    choose.children[i].onclick = function(){
+        playerNumber = i;
+        removeChoose();
+        createPlayers(0);
+    }
+}

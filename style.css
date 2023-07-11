@@ -99,7 +99,6 @@ body{
 .seconds{
     animation: shadowsecond 5s infinite linear reverse;
 }
-
 @keyframes rotate {
     0%{
         transform: rotateX(85deg) rotate(0deg) scale(1);
